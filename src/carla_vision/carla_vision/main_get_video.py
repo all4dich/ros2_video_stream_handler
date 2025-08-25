@@ -4,18 +4,24 @@ from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 import cv2
 from rclpy.qos import qos_profile_sensor_data
+from argparse import ArgumentParser
+
+arg_parser = ArgumentParser()
+arg_parser.add_argument('--output-filename', type=str, default='/tmp/output_video.avi', help='Output video filename (e.g., /tmp/output_video.avi)')
+arg_parser.add_argument('--output-fps', type=float, default=30.0, help='Output video frames per second (FPS)')
+args_script = arg_parser.parse_args()
 
 class ImageSubscriber(Node):
-    def __init__(self):
+    def __init__(self, output_filename='/tmp/output_video.avi', output_fps=30.0):
         super().__init__('image_viewer')
         self.declare_parameter('image_topic', '/sensing/camera/traffic_light/image_raw')
         image_topic = self.get_parameter('image_topic').get_parameter_value().string_value
 
         # Parameters for video saving
-        self.declare_parameter('output_video_filename', 'output_video.avi')
+        self.declare_parameter('output_video_filename', output_filename)
         self.video_filename = self.get_parameter('output_video_filename').get_parameter_value().string_value
 
-        self.declare_parameter('output_video_fps', 30.0) # Default FPS for the output video
+        self.declare_parameter('output_video_fps', output_fps) # Default FPS for the output video
         self.output_fps = self.get_parameter('output_video_fps').get_parameter_value().double_value
 
         self.subscription = self.create_subscription(
@@ -66,8 +72,7 @@ class ImageSubscriber(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    image_subscriber = ImageSubscriber()
-
+    image_subscriber = ImageSubscriber(output_filename=args_script.output_filename, output_fps=args_script.output_fps)
     try:
         rclpy.spin(image_subscriber)
     except KeyboardInterrupt:
