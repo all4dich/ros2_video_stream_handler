@@ -1,14 +1,10 @@
-Welcome to ChatGPT shell
+## Display a video stream from `/sensing/camera/traffic_light/image_raw` topic in ROS2 Humble
 
-  Type help and press RET for details.
-
-  Like this package? Consider ✨sponsoring✨
-
-<shell-maker-failed-command>
-
-Gemini(2.5-flash-preview/General)> I'm using Carla-autoware-bridge with ros2 humble. Create a Python script to get read video stream from '/sensing/camera/traffic_light/image_raw' topic and show it on the screen. 
-<shell-maker-end-of-promp
-To display a video stream from the `/sensing/camera/traffic_light/image_raw` topic in ROS 2 Humble using a Python script, you'll need to create a subscriber node that receives `sensor_msgs/Image` messages, converts them to an OpenCV format, and then displays them on the screen. The `cv_bridge` library is essential for this conversion.
+To display a video stream from the `/sensing/camera/traffic_light/image_raw` topic in ROS 2 Humble using a Python script, 
+- You'll need to create a subscriber node that receives `sensor_msgs/Image` messages, 
+- Convert them to an OpenCV format, and then 
+- Display them on the screen. 
+    - The `cv_bridge` library is essential for this conversion.
 
 Here's the Python script:
 
@@ -66,7 +62,6 @@ if __name__ == '__main__':
 ```
 
 ### Explanation:
-
 1.  **Import necessary libraries**:
     *   `rclpy`: The ROS 2 Python client library.
     *   `Node`: The base class for a ROS node.
@@ -112,19 +107,18 @@ if __name__ == '__main__':
     ros2 run your_package_name traffic_light_viewer.py --ros-args -p image_topic:=/some_other_image_topic
     ```
 
-Make sure you have `rclpy`, `cv_bridge`, and `opencv-python` installed in your ROS 2 Humble environment. If not, you can typically install them via:```bash
+Make sure you have `rclpy`, `cv_bridge`, and `opencv-python` installed in your ROS 2 Humble environment. If not, you can typically install them via:
+```bash
 sudo apt update
 sudo apt install ros-humble-cv-bridge ros-humble-image-transport python3-opencv
 ```
 
-Gemini(2.5-flash-preview/General)> What is ROS 2 package ? I just have a Python script.
-<shell-maker-end-of-prompt>
-A ROS 2 package is the fundamental unit for structuring and organizing code in a ROS 2 system. It's more than just a single Python script; it's a self-contained bundle of related code, libraries, executables, configuration files, and other resources that provide specific functionalities. Organizing your code into packages allows for modularity, reusability, and easier sharing and deployment of your robotics applications.
-
-When you use `ros2 run <your_package_name> <your_executable_name>`, ROS 2 looks for an executable or script within a defined package, not just any Python file on your system.
 
 ### Why use a ROS 2 package?
 
+A ROS 2 package is the fundamental unit for structuring and organizing code in a ROS 2 system. It's more than just a single Python script; it's a self-contained bundle of related code, libraries, executables, configuration files, and other resources that provide specific functionalities. Organizing your code into packages allows for modularity, reusability, and easier sharing and deployment of your robotics applications.
+
+When you use `ros2 run <your_package_name> <your_executable_name>`, ROS 2 looks for an executable or script within a defined package, not just any Python file on your system.
 *   **Organization**: Keeps related code and resources together.
 *   **Reusability**: Makes it easy to reuse your code in other projects or share it with others.
 *   **Build System Integration**: Integrates with ROS 2's build system (`colcon` and `ament`) for consistent building and installation.
@@ -309,5 +303,3 @@ python3 traffic_light_viewer.py
 However, this is generally **not recommended** for packaged ROS 2 nodes. The `ros2 run` command handles all these environment setup and package discovery steps for you seamlessly, making it the standard and most robust way to launch your applications.
 
 **In summary: Stick with `ros2 run <your_package_name> <your_executable_name>`. It's the correct and intended method for running ROS 2 nodes.**
-
-Gemini(2.5-flash-preview/General)> 
