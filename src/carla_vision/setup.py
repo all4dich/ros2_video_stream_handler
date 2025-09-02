@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'main_get_video = carla_vision.main_get_video:main'
+            'main_get_video = carla_vision.main_get_video:main',
+            'main_get_lidar = carla_vision.main_get_lidar:main'
         ],
     },
 )
