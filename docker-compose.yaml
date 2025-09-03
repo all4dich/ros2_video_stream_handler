@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  ros2_container:
+    build: .
+    platform: linux/amd64
+    container_name: ros2_humble_container
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/root/ros2_ws
