@@ -21,7 +21,8 @@ setup(
     entry_points={
         'console_scripts': [
             'main_get_video = carla_vision.main_get_video:main',
-            'main_get_lidar = carla_vision.main_get_lidar:main'
+            'main_get_lidar = carla_vision.main_get_lidar:main',
+            'simple_subscriber = carla_vision.main_simple_subscriber:main'
         ],
     },
 )
