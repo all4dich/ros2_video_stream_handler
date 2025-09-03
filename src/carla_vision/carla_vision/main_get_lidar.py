@@ -45,7 +45,7 @@ class LidarSubscriber(Node):
 
     def lidar_callback(self, msg):
         # Read point cloud data
-        points = point_cloud2.read_points_numpy(msg, field_names=("x", "y", "z"))
+        points = point_cloud2.read_points(msg, field_names=("x", "y", "z"))
 
         # Create a blank BEV image
         bev_image = np.zeros((BEV_HEIGHT, BEV_WIDTH, 3), dtype=np.uint8)
